@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<autopilotfilemapping:AutoPilotFileMapping xmlns:autopilotfilemapping="www.autoesl.com/autopilotfilemapping">
+  <source>
+    <originFiles name="top.h" path="/home/cypox/projects/hls2hdmi/hls/src/top.h"/>
+    <originFiles name="top.cpp" path="/home/cypox/projects/hls2hdmi/hls/src/top.cpp"/>
+  </source>
+  <testbench>
+    <originFiles name="top-tb.cpp" path="/home/cypox/projects/hls2hdmi/hls/src/top-tb.cpp"/>
+    <originFiles name="input-tb.jpg" path="/home/cypox/projects/hls2hdmi/hls/src/input-tb.jpg"/>
+  </testbench>
+</autopilotfilemapping:AutoPilotFileMapping>

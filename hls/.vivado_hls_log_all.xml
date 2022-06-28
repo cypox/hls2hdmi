@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vivadoHLSLog:LogRoot xmlns:vivadoHLSLog="www.xilinx.com/vivadoHLSLog">
+  <errorLogs>
+    <logs>
+      <synLog/>
+      <simLog>
+        <logs message="ERROR: [COSIM 212-331] Aborting co-simulation: C simulation failed, compilation errors.&#xA;command 'ap_source' returned error code&#xA;    while executing&#xA;&quot;source /home/cypox/projects/hls2hdmi/hls/solution1/cosim.tcl&quot;&#xA;    invoked from within&#xA;&quot;hls::main /home/cypox/projects/hls2hdmi/hls/solution1/cosim.tcl&quot;&#xA;    (&quot;uplevel&quot; body line 1)&#xA;    invoked from within&#xA;&quot;uplevel 1 hls::main {*}$args&quot;&#xA;    (procedure &quot;hls_proc&quot; line 5)&#xA;    invoked from within&#xA;&quot;hls_proc $argv&quot;&#xA;" projectName="hls" solutionName="solution1" date="2021-03-01T15:07:34.082+0100"/>
+        <logs message="ERROR: [COSIM 212-321] EXE file generate failed." projectName="hls" solutionName="solution1" date="2021-03-01T15:07:34.045+0100"/>
+        <logs message="ERROR: [COSIM 212-321] EXE file generate failed." projectName="hls" solutionName="solution1" date="2021-03-01T15:07:34.029+0100"/>
+        <logs message="ERROR: [COSIM 212-317] C++ compile error." projectName="hls" solutionName="solution1" date="2021-03-01T15:07:34.024+0100"/>
+        <logs message="ERROR: [COSIM 212-331] Aborting co-simulation: C simulation failed, compilation errors.&#xA;command 'ap_source' returned error code&#xA;    while executing&#xA;&quot;source /home/cypox/projects/hls2hdmi/hls/solution1/cosim.tcl&quot;&#xA;    invoked from within&#xA;&quot;hls::main /home/cypox/projects/hls2hdmi/hls/solution1/cosim.tcl&quot;&#xA;    (&quot;uplevel&quot; body line 1)&#xA;    invoked from within&#xA;&quot;uplevel 1 hls::main {*}$args&quot;&#xA;    (procedure &quot;hls_proc&quot; line 5)&#xA;    invoked from within&#xA;&quot;hls_proc $argv&quot;&#xA;" projectName="hls" solutionName="solution1" date="2021-03-01T15:05:34.755+0100"/>
+        <logs message="ERROR: [COSIM 212-321] EXE file generate failed." projectName="hls" solutionName="solution1" date="2021-03-01T15:05:34.751+0100"/>
+        <logs message="ERROR: [COSIM 212-321] EXE file generate failed." projectName="hls" solutionName="solution1" date="2021-03-01T15:05:34.744+0100"/>
+        <logs message="ERROR: [COSIM 212-317] C++ compile error." projectName="hls" solutionName="solution1" date="2021-03-01T15:05:34.707+0100"/>
+      </simLog>
+      <mgLog/>
+      <packageLog/>
+      <csimLog/>
+    </logs>
+  </errorLogs>
+  <warningLogs>
+    <logs>
+      <synLog>
+        <logs message="WARNING: [HLS 200-433] Loop - loop_wait_for_start has an initiation interval that is equal to the pipeline depth (1) - this results in an unpipelined loop." projectName="hls" solutionName="solution1" date="2021-03-01T15:03:59.728+0100" type="Warning"/>
+        <logs message="WARNING: [HLS 200-433] Loop - loop_wait_for_start has an initiation interval that is equal to the pipeline depth (1) - this results in an unpipelined loop." projectName="hls" solutionName="solution1" date="2021-03-01T15:03:59.652+0100" type="Warning"/>
+        <logs message="WARNING: [HLS 200-433] Loop - loop_wait_for_start has an initiation interval that is equal to the pipeline depth (1) - this results in an unpipelined loop." projectName="hls" solutionName="solution1" date="2021-03-01T15:03:59.332+0100" type="Warning"/>
+        <logs message="WARNING: [HLS 200-433] Loop - loop_wait_for_start has an initiation interval that is equal to the pipeline depth (1) - this results in an unpipelined loop." projectName="hls" solutionName="solution1" date="2021-03-01T15:03:59.250+0100" type="Warning"/>
+        <logs message="WARNING: [XFORM 203-631] Renaming function 'hls::AXIvideo2Mat&lt;16, 1080, 1920, 2048>' to 'AXIvideo2Mat' (/opt/Xilinx/Vivado/2018.2/common/technology/autopilot/hls/hls_video_io.h:49:9)" projectName="hls" solutionName="solution1" date="2021-03-01T15:03:59.009+0100" type="Warning"/>
+        <logs message="WARNING: [XFORM 203-631] Renaming function 'hls::Mat2AXIvideo&lt;16, 1080, 1920, 2048>' to 'Mat2AXIvideo' (/opt/Xilinx/Vivado/2018.2/common/technology/autopilot/hls/hls_video_io.h:78:50)" projectName="hls" solutionName="solution1" date="2021-03-01T15:03:58.781+0100" type="Warning"/>
+        <logs message="WARNING: [XFORM 203-1103] Ignored data pack directive on non-struct variable 'img.data_stream.V' (hls/src/top.cpp:15)." projectName="hls" solutionName="solution1" date="2021-03-01T15:03:58.186+0100" type="Warning"/>
+        <logs message="WARNING: [SYNCHK 200-23] /opt/Xilinx/Vivado/2018.2/common/technology/autopilot/hls/hls_axi_io.h:78: variable-indexed range selection may cause suboptimal QoR." projectName="hls" solutionName="solution1" date="2021-03-01T15:03:58.001+0100" type="Warning"/>
+      </synLog>
+      <simLog/>
+      <mgLog/>
+      <packageLog/>
+      <csimLog/>
+    </logs>
+  </warningLogs>
+</vivadoHLSLog:LogRoot>

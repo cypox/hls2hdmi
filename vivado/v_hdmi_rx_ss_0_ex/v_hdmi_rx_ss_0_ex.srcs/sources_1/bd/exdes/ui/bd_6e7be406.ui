@@ -1,0 +1,23 @@
+{
+   ExpandedHierarchyInLayout: "",
+   guistr: "# # String gsaved with Nlview 6.8.5  2018-01-30 bk=1.4354 VDI=40 GEI=35 GUI=JA:1.6 TLS
+#  -string -flagsOSRD
+preplace port S_AXI_GPIO -pg 1 -y 130 -defaultsOSRD
+preplace port m_axi_aresetn -pg 1 -y 170 -defaultsOSRD
+preplace port ap_clk -pg 1 -y 150 -defaultsOSRD
+preplace port m_axis_video -pg 1 -y 70 -defaultsOSRD
+preplace port S_AXI_TPG -pg 1 -y 50 -defaultsOSRD
+preplace port s_axis_video -pg 1 -y 70 -defaultsOSRD
+preplace inst axi_gpio -pg 1 -lvl 1 -y 150 -defaultsOSRD
+preplace inst process_image_0 -pg 1 -lvl 2 -y 80 -defaultsOSRD
+preplace netloc net_bdry_in_ap_clk 1 0 2 20 230 300J
+preplace netloc intf_net_bdry_in_S_AXI_GPIO 1 0 1 NJ
+preplace netloc process_image_0_video_out 1 2 1 N
+preplace netloc s_axis_video_1 1 0 2 NJ 70 NJ
+preplace netloc S_AXI_TPG_1 1 0 2 NJ 50 NJ
+preplace netloc net_bdry_in_m_axi_aresetn 1 0 1 NJ
+preplace netloc net_axi_gpio_gpio_io_o 1 1 1 310
+levelinfo -pg 1 0 160 500 710 -top -10 -bot 240
+",
+}
+

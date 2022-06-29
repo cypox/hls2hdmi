@@ -176,7 +176,7 @@ extern void UpdateColorDepth(XVphy *VphyPtr, XV_HdmiTxSs *pHdmiTxSs, XVidC_Color
 extern void UpdateFrameRate(XVphy *VphyPtr, XV_HdmiTxSs *pHdmiTxSs, XVidC_FrameRate FrameRate);
 extern void XV_HdmiTxSs_ShowEdid(XV_HdmiTxSs *InstancePtr);
 extern void CloneTxEdid(void);
-extern void XV_ConfigTpg(XV_tpg *InstancePtr);
+extern void XV_ConfigProcess(XProcess_image *InstancePtr);
 XV_VidC_EdidCntrlParam EdidCtrlParam;
 #endif
 #ifdef XPAR_XV_HDMIRXSS_NUM_INSTANCES
@@ -230,8 +230,8 @@ extern XV_HdmiRxSs HdmiRxSs;       /* HDMI RX SS structure */
 extern u8 IsPassThrough;         /**< Demo mode 0-colorbar 1-pass through */
 extern u8 TxBusy;                // TX busy flag. This flag is set while the TX is initialized
 #ifdef XPAR_XV_HDMITXSS_NUM_INSTANCES
-extern XV_tpg Tpg;				/* TPG structure */
-extern XTpg_PatternId Pattern;
+extern XProcess_image Pimg;				/* TPG structure */
+//extern XTpg_PatternId Pattern;
 #endif
 extern XHdcp_Repeater HdcpRepeater;
 
@@ -1615,73 +1615,73 @@ void XHdmi_DisplayVideoMenu(void) {
 static XHdmi_MenuType XHdmi_VideoMenu(XHdmi_Menu *InstancePtr, u8 Input) {
 	// Variables
 	XHdmi_MenuType 	Menu;
-	XTpg_PatternId NewPattern;
+	//XTpg_PatternId NewPattern;
 
 	// Default
 	Menu = XHDMI_VIDEO_MENU;
-	NewPattern = XTPG_BKGND_LAST;
+	//NewPattern = XTPG_BKGND_LAST;
 
 	// Insert carriage return
 	xil_printf("\r\n");
 
 	switch (Input) {
 		case 1 :
-			NewPattern = XTPG_BKGND_COLOR_BARS;
+			//NewPattern = XTPG_BKGND_COLOR_BARS;
 			xil_printf("Colorbars\r\n");
 			break;
 
 		case 2 :
-			NewPattern = XTPG_BKGND_SOLID_RED;
+			//NewPattern = XTPG_BKGND_SOLID_RED;
 			xil_printf("Solid red\r\n");
 			break;
 
 		case 3 :
-			NewPattern = XTPG_BKGND_SOLID_GREEN;
+			//NewPattern = XTPG_BKGND_SOLID_GREEN;
 			xil_printf("Solid green\r\n");
 			break;
 
 		case 4 :
-			NewPattern = XTPG_BKGND_SOLID_BLUE;
+			//NewPattern = XTPG_BKGND_SOLID_BLUE;
 			xil_printf("Solid blue\r\n");
 			break;
 
 		case 5 :
-			NewPattern = XTPG_BKGND_SOLID_BLACK;
+			//NewPattern = XTPG_BKGND_SOLID_BLACK;
 			xil_printf("Solid black\r\n");
 			break;
 
 		case 6 :
-			NewPattern = XTPG_BKGND_SOLID_WHITE;
+			//NewPattern = XTPG_BKGND_SOLID_WHITE;
 			xil_printf("Solid white\r\n");
 			break;
 
 		case 7 :
-			NewPattern = XTPG_BKGND_H_RAMP;
+			//NewPattern = XTPG_BKGND_H_RAMP;
 			xil_printf("Horizontal ramp\r\n");
 			break;
 
 		case 8 :
-			NewPattern = XTPG_BKGND_V_RAMP;
+			//NewPattern = XTPG_BKGND_V_RAMP;
 			xil_printf("Vertical ramp\r\n");
 			break;
 
 		case 9 :
-			NewPattern = XTPG_BKGND_RAINBOW_COLOR;
+			//NewPattern = XTPG_BKGND_RAINBOW_COLOR;
 			xil_printf("Rainbow colors\r\n");
 			break;
 
 		case 10 :
-			NewPattern = XTPG_BKGND_CHECKER_BOARD;
+			//NewPattern = XTPG_BKGND_CHECKER_BOARD;
 			xil_printf("Checker board\r\n");
 			break;
 
 		case 11 :
-			NewPattern = XTPG_BKGND_CROSS_HATCH;
+			//NewPattern = XTPG_BKGND_CROSS_HATCH;
 			xil_printf("Cross hatch\r\n");
 			break;
 
 		case 12 :
-			NewPattern = XTPG_BKGND_PBRS;
+			//NewPattern = XTPG_BKGND_PBRS;
 			xil_printf("Noise\r\n");
 			break;
 
@@ -1730,15 +1730,15 @@ static XHdmi_MenuType XHdmi_VideoMenu(XHdmi_Menu *InstancePtr, u8 Input) {
 	}
 
 
-	if (NewPattern != XTPG_BKGND_LAST) {
+	//if (NewPattern != XTPG_BKGND_LAST) {
 		/* Set video pattern */
-		Pattern = NewPattern;
+		//Pattern = NewPattern;
 		/* Start TPG */
 		xil_printf("new pattern\r\n");
-		XV_ConfigTpg(&Tpg);
+		XV_ConfigProcess(&Pimg);
 		XV_HdmiTxSS_MaskDisable(&HdmiTxSs);
 		xil_printf("Enter Selection -> ");
-	}
+	//}
 
 	return Menu;
 }

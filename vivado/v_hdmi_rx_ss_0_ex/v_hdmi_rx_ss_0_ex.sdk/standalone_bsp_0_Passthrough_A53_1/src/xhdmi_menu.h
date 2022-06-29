@@ -107,7 +107,8 @@ extern "C" {
 #endif
 #ifdef XPAR_XV_HDMITXSS_NUM_INSTANCES
 #include "xv_hdmitxss.h"
-#include "xv_tpg.h"
+//#include "xv_tpg.h"
+#include "xprocess_image.h"
 #include "audiogen_drv.h"
 #endif
 #include "xhdmi_example.h"

@@ -145,9 +145,9 @@ void CloneTxEdid(void);
 #endif
 
 #ifdef XPAR_XV_HDMITXSS_NUM_INSTANCES
-#ifdef XPAR_XV_TPG_NUM_INSTANCES
-void XV_ConfigTpg(XV_tpg *InstancePtr);
-void ResetTpg(void);
+#ifdef XPAR_XPROCESS_IMAGE_NUM_INSTANCES
+void XV_ConfigProcess(XProcess_image *InstancePtr);
+void ResetProcess(void);
 #endif
 #endif
 
@@ -193,12 +193,12 @@ u8                 VphyPllLayoutErrorFlag;
 XV_HdmiTxSs        HdmiTxSs;
 XV_HdmiTxSs_Config *XV_HdmiTxSs_ConfigPtr;
 
-#ifdef XPAR_XV_TPG_NUM_INSTANCES
+#ifdef XPAR_XPROCESS_IMAGE_NUM_INSTANCES
 /* Test Pattern Generator Structure */
-XV_tpg             Tpg;
-XV_tpg_Config      *Tpg_ConfigPtr;
+XProcess_image             Pimg;
+XProcess_image_Config      *Pimg_ConfigPtr;
 /* Video Pattern */
-XTpg_PatternId     Pattern;
+//XTpg_PatternId     Pattern;
 #endif
 
 #ifdef USE_HDMI_AUDGEN
@@ -338,9 +338,9 @@ void CloneTxEdid(void)
 * @note   None.
 *
 ******************************************************************************/
-void XV_ConfigTpg(XV_tpg *InstancePtr)
+void XV_ConfigProcess(XProcess_image *InstancePtr)
 {
-	XV_tpg                *pTpg = InstancePtr;
+	XProcess_image        *pTpg = InstancePtr;
 	XVidC_VideoStream     *HdmiTxSsVidStreamPtr;
 #ifdef XPAR_XV_HDMIRXSS_NUM_INSTANCES
 	XHdmiC_AVI_InfoFrame  *AVIInfoFramePtr;
@@ -394,30 +394,30 @@ void XV_ConfigTpg(XV_tpg *InstancePtr)
 	/* Can't set TPG to pass-through mode if the width or height = 0 */
 	if (!((width == 0 || height == 0) && IsPassThrough)) {
 		//Stop TPG
-		XV_tpg_DisableAutoRestart(pTpg);
+		XProcess_image_DisableAutoRestart(pTpg);
 
-		XV_tpg_Set_height(pTpg, height);
-		XV_tpg_Set_width(pTpg,  width);
-		XV_tpg_Set_colorFormat(pTpg, HdmiTxSsVidStreamPtr->ColorFormatId);
-		XV_tpg_Set_bckgndId(pTpg, Pattern);
-		XV_tpg_Set_ovrlayId(pTpg, 0);
+		XProcess_image_Set_height(pTpg, height);
+		XProcess_image_Set_width(pTpg,  width);
+		//XProcess_image_Set_colorFormat(pTpg, HdmiTxSsVidStreamPtr->ColorFormatId);
+		//XProcess_image_Set_bckgndId(pTpg, Pattern);
+		//XProcess_image_Set_ovrlayId(pTpg, 0);
 
-		XV_tpg_Set_enableInput(pTpg, IsPassThrough);
+		//XProcess_image_Set_enableInput(pTpg, IsPassThrough);
 
 		if (IsPassThrough) {
-			XV_tpg_Set_passthruStartX(pTpg,0);
-			XV_tpg_Set_passthruStartY(pTpg,0);
-			XV_tpg_Set_passthruEndX(pTpg,width);
-			XV_tpg_Set_passthruEndY(pTpg,height);
+			//XProcess_image_Set_passthruStartX(pTpg,0);
+			//XProcess_image_Set_passthruStartY(pTpg,0);
+			//XProcess_image_Set_passthruEndX(pTpg,width);
+			//XProcess_image_Set_passthruEndY(pTpg,height);
 		}
 
 		//Start TPG
-		XV_tpg_EnableAutoRestart(pTpg);
-		XV_tpg_Start(pTpg);
+		XProcess_image_EnableAutoRestart(pTpg);
+		XProcess_image_Start(pTpg);
 	}
 }
 
-void ResetTpg(void)
+void ResetProcess(void)
 {
 	XGpio_SetDataDirection(&Gpio_Tpg_resetn, 1, 0);
 	XGpio_DiscreteWrite(&Gpio_Tpg_resetn, 1, 0);
@@ -1712,7 +1712,7 @@ void TxStreamUpCallback(void *CallbackRef) {
 	xil_printf("TX stream is up\r\n");
 
 	/* Reset the TPG */
-	ResetTpg();
+	ResetProcess();
 
 	/* Check for the 480i/576i during color bar mode
 	 * When it's (TRUE), set the Info Frame Pixel Repetition to x2
@@ -1758,10 +1758,10 @@ void TxStreamUpCallback(void *CallbackRef) {
 	XV_HdmiTxSs_SetSamplingRate(HdmiTxSsPtr, Vphy.HdmiTxSampleRate);
 
 	/* Set colorbar pattern */
-	Pattern = XTPG_BKGND_COLOR_BARS;
+	//Pattern = XTPG_BKGND_COLOR_BARS;
 
 	/* Config and Run the TPG */
-	XV_ConfigTpg(&Tpg);
+	XV_ConfigProcess(&Pimg);
 
 #if defined(XPAR_XV_HDMITXSS_NUM_INSTANCES)
 #if defined(USE_HDMI_AUDGEN)
@@ -1888,7 +1888,7 @@ void StartTxAfterRx(void) {
 	StartTxAfterRxFlag = (FALSE);
 
 	/* Reset TPG */
-	ResetTpg();
+	ResetProcess();
 
 	/* Disable TX TDMS clock */
 	XVphy_Clkout1OBufTdsEnable(&Vphy, XVPHY_DIR_TX, (FALSE));
@@ -2954,10 +2954,10 @@ int main() {
 #endif
 
 #ifdef XPAR_XV_HDMITXSS_NUM_INSTANCES
-#ifdef XPAR_XV_TPG_NUM_INSTANCES
+#ifdef XPAR_XPROCESS_IMAGE_NUM_INSTANCES
 	/* Initialize GPIO for Tpg Reset */
 	Gpio_Tpg_resetn_ConfigPtr =
-		XGpio_LookupConfig(XPAR_V_TPG_SS_0_AXI_GPIO_DEVICE_ID);
+		XGpio_LookupConfig(XPAR_PASSTHROUGH_0_AXI_GPIO_DEVICE_ID);
 
 	if(Gpio_Tpg_resetn_ConfigPtr == NULL) {
 		Gpio_Tpg_resetn.IsReady = 0;
@@ -2973,16 +2973,15 @@ int main() {
 		return(XST_FAILURE);
 	}
 
-	ResetTpg();
+	ResetProcess();
 
-	Tpg_ConfigPtr = XV_tpg_LookupConfig(XPAR_V_TPG_SS_0_V_TPG_DEVICE_ID);
-	if(Tpg_ConfigPtr == NULL) {
-		Tpg.IsReady = 0;
+	Pimg_ConfigPtr = XProcess_image_LookupConfig(XPAR_PASSTHROUGH_0_PROCESS_IMAGE_0_DEVICE_ID);
+	if(Pimg_ConfigPtr == NULL) {
+		Pimg.IsReady = 0;
 		return (XST_DEVICE_NOT_FOUND);
 	}
 
-	Status = XV_tpg_CfgInitialize(&Tpg,
-								  Tpg_ConfigPtr, Tpg_ConfigPtr->BaseAddress);
+	Status = XProcess_image_CfgInitialize(&Pimg, Pimg_ConfigPtr);
 	if(Status != XST_SUCCESS) {
 		xil_printf("ERR:: TPG Initialization failed %d\r\n", Status);
 		return(XST_FAILURE);
